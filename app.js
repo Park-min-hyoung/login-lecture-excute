@@ -1,17 +1,19 @@
+"use strict";
+
+// 모듈
 const express = require("express");
 const app = express();
+
+const PORT = 4000;
+
+// 라우팅
+const home = require("./routes/home");
 
 app.set("views", "./views");
 app.set("view engine", "ejs");
 
-app.get("/", (req, res) => {
-    res.render("home/index");
-});
+app.use("/", home); // use -> 미들 웨어를 등록해주는 메소드
 
-app.get("/login", (req, res) => {
-    res.render("home/login");
-});
-
-app.listen(4000, function() {
+app.listen(PORT, function() {
     console.log("서버 가동쓰!!");
 });
