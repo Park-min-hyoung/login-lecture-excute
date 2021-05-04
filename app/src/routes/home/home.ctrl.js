@@ -32,8 +32,6 @@ const process = {
             success: false,
             msg: "로그인에 실패하셨습니다.",
         });
-
-        console.log(res.json());
     },
 };
 
