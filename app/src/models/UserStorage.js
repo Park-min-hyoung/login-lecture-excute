@@ -1,8 +1,18 @@
 "use strict";
 
-const fs = require("fs");
+const fs = require("fs").promise;
 
 class UserStorage {
+    static #getUserInfo(data,id){
+        const users = JSON.parse(data);
+        const idx = users.id.indexOf(id);
+        const userKeys = Object.keys(users);
+        const userInfo = userKeys.reduce((newUser, info) => {
+            newUser[info] = users[info][idx];
+            return newUser;
+        }, {});
+        return userInfo;
+    }
 
     static getUsers(...fields) {
         //const users = this.#users;
@@ -17,20 +27,12 @@ class UserStorage {
     }
 
     static getUserInfo(id) {
-        fs.readFile("./src/databases/users.json"), (err, data) => {
-            if (err) throw err;
-
-            const users = JSON.parse(data);
-
-            const idx = users.id.indexOf(id);
-            const userKeys = Object.keys(users);
-            const userInfo = userKeys.reduce((newUser, info) => {
-                newUser[info] = users[info][idx];
-                return newUser;
-            }, {});
-            console.log(userInfo);
-            return userInfo;
-        }
+        return fs
+            .readFile("./src/databases/users.json")
+            .then((data) => {
+                return this.#getUserInfo(data, id);
+            })
+            .catch((err) => console.err);
     }
 
     static save(userInfo) {
