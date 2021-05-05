@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/Park-min-hyoung/login-lecture-excute/issues"
   },
-  "homepage": "https://github.com/Park-min-hyoung/login-lecture-excute#readme"
+  "homepage": "https://github.com/Park-min-hyoung/login-lecture-excute#readme",
+  "dependencies": {
+    "dotenv": "^8.5.1",
+    "mysql": "^2.18.1"
+  }
 }

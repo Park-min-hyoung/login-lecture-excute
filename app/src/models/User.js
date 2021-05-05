@@ -26,7 +26,7 @@ class User {
             const response = await UserStorage.save(client);
             return response;
         } catch (err) {
-            return { success: false, msg: err};
+            return { success: false, msg: "이미 존재하는 아이디입니다."};
         }
         
     }
